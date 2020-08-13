@@ -1,7 +1,8 @@
 import discord
 import asyncio
 from discord.ext import commands
-token = 'NzI4NDYxMTA5Nzc3OTI0MTQ2.Xv6uRg.irNFAc3pLdaFXdjrneg3ps3S8fw' #токен
+import os
+token = os.environ.get('TOKENZ') #токен
 print('Ожидание входа...')
 class MyClient(discord.Client):
 	async def on_ready(self):
