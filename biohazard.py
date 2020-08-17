@@ -9,8 +9,10 @@ class MyClient(discord.Client):
 	async def on_ready(self):
 		print('Вошёл как', self.user)
 		while True:
-			await client.change_presence(activity = discord.Game(str(len(client.servers)) + ' | v2.0'))
-			time.sleep(30)
+			await client.change_presence(activity = discord.Game('Крутой бот | v2.0'))
+			time.sleep(10)
+			await client.change_presence(activity = discord.Game('Анти-рейд | v2.0'))
+			time.sleep(10)
 		
 	async def on_message(self, message):
 		c = 0
