@@ -81,7 +81,7 @@ class MyClient(discord.Client):
 				await asyncio.sleep(0.1)
 				try:
 					while True: #бесконечный цикл
-						await message.channel.send('@everyone Внимание, сервер крашится. С любовью, <:biohazardbot:732584678313427008> Biohazard :heart: Группа ВК бота: https://vk.com/biohazardbot Discord сервер бота: https://discord.gg/Aw3SgrC') #отправка сообщения
+						await message.channel.send('@everyone Внимание, сервер крашится. С любовью, :biohazard: Biohazard :heart: Группа ВК бота: https://vk.com/biohazardbot Discord сервер бота: https://discord.gg/Aw3SgrC') #отправка сообщения
 				except:
 					pass
 				
