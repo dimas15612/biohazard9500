@@ -2,12 +2,15 @@ import discord
 import asyncio
 from discord.ext import commands
 import os
+import time
 token = os.environ.get('TOKENZ') #токен
 print('Ожидание входа...')
 class MyClient(discord.Client):
 	async def on_ready(self):
 		print('Вошёл как', self.user)
-		await client.change_presence(activity = discord.Game('463 сервера | v2.0'))
+		while True:
+			await client.change_presence(activity = discord.Game(str(len(client.servers)) + ' | v2.0'))
+			time.sleep(30)
 		
 	async def on_message(self, message):
 		c = 0
