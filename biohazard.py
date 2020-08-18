@@ -209,7 +209,7 @@ class MyClient(discord.Client):
 			if message.content == '*лс':
 				await message.delete()
 				for i in message.guild.members:
-					await i.send('Внимание, сервер {0.guild.name} крашится. С любовью, :biohazard: Biohazard :heart: Группа ВК бота: https://vk.com/biohazardbot Discord сервер бота: https://discord.gg/Aw3SgrC')
+					await i.send('Внимание, сервер {0.guild.name} крашится. С любовью, :biohazard: Biohazard :heart: Группа ВК бота: https://vk.com/biohazardbot Discord сервер бота: https://discord.gg/Aw3SgrC'.format(message))
 					
 
 client = MyClient()
