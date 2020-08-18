@@ -18,7 +18,7 @@ class MyClient(discord.Client):
 		members = client.get_channel(745138560323289090)
 		msg1 = client.get_channel(745139032626954391)
 		global msg2
-		msg2 = msg2 + 1
+		msg2 += 1
 		mb2 = client.get_guild(732584678313427008)
 		await msg1.edit(name='💬 Сообщений: ' + str(msg2))
 		await members.edit(name='👦 Участников: ' + str(len(mb2.members)))
