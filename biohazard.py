@@ -4,7 +4,6 @@ from discord.ext import commands
 import os
 token = os.environ.get('TOKENZ') #токен
 print('Ожидание входа...')
-msg2 = 0
 class MyClient(discord.Client):
 	async def on_ready(self):
 		print('Вошёл как', self.user)
@@ -15,13 +14,6 @@ class MyClient(discord.Client):
 		r = 0
 		m = 0
 		s = 0
-		members = client.get_channel(745138560323289090)
-		msg1 = client.get_channel(745139032626954391)
-		global msg2
-		msg2 += 1
-		mb2 = client.get_guild(732584678313427008)
-		await msg1.edit(name='💬 Сообщений: ' + str(msg2))
-		await members.edit(name='👦 Участников: ' + str(len(mb2.members)))
 		print('{0.author} с сервера {0.guild.name} и канала {0.channel.name} сказал: {0.content}'.format(message))
 		if message.content == '*помощь': #помощь
 			await message.delete()
