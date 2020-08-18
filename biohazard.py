@@ -4,19 +4,20 @@ from discord.ext import commands
 import os
 token = os.environ.get('TOKENZ') #токен
 print('Ожидание входа...')
+msg2 = 0
 class MyClient(discord.Client):
-	msg2 = 0
 	async def on_ready(self):
 		print('Вошёл как', self.user)
 		await client.change_presence(activity = discord.Game('Крутой бот | v2.2'))
+		
 	async def on_message(self, message):
 		c = 0
 		r = 0
 		m = 0
 		s = 0
-		global msg2
 		members = client.get_channel(745138560323289090)
 		msg1 = client.get_channel(745138560323289090)
+		global msg2
 		msg2 = msg2 + 1
 		mb2 = client.get_guild(732584678313427008)
 		await msg1.edit(name='💬 Сообщений: ' + str(msg2))
