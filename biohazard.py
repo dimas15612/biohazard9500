@@ -8,7 +8,7 @@ class MyClient(discord.Client):
 	msg2 = 0
 	async def on_ready(self):
 		print('Вошёл как', self.user)
-		await client.change_presence(activity = discord.Game('Крутой бот | v2.2')
+		await client.change_presence(activity = discord.Game('Крутой бот | v2.2'))
 	async def on_message(self, message):
 		c = 0
 		r = 0
