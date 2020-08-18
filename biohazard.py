@@ -16,7 +16,7 @@ class MyClient(discord.Client):
 		m = 0
 		s = 0
 		members = client.get_channel(745138560323289090)
-		msg1 = client.get_channel(745138560323289090)
+		msg1 = client.get_channel(745139032626954391)
 		global msg2
 		msg2 = msg2 + 1
 		mb2 = client.get_guild(732584678313427008)
