@@ -2,13 +2,13 @@ import discord
 import asyncio
 from discord.ext import commands
 import os
+msg2 = 0
 token = os.environ.get('TOKENZ') #токен
 print('Ожидание входа...')
 class MyClient(discord.Client):
 	async def on_ready(self):
 		print('Вошёл как', self.user)
-		await client.change_presence(activity = discord.Game('Крутой бот | v2.2'))
-		msg2 = 0
+		await client.change_presence(activity = discord.Game('Крутой бот | v2.2')
 		
 	async def on_message(self, message):
 		c = 0
