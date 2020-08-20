@@ -48,13 +48,13 @@ class MyClient(discord.Client):
 				await message.author.send(':white_check_mark: Сервер находится в белом списке.')
 		if message.content == '*чс':
 			await message.delete()
-			if black.find(str(message.guild.id)) == -1:
+			if black.find(str(message.author.id)) == -1:
 				await message.author.send(':white_check_mark: Вас нет в чёрном списке.')
 			else:
 				await message.author.send(':x: Вы находитесь в чёрном списке.')
 		if message.content == '*вип':
 			await message.delete()
-			if vips.find(str(message.guild.id)) == -1:
+			if vips.find(str(message.author.id)) == -1:
 				await message.author.send(':x: У вас нет VIP-статуса.')
 			else:
 				await message.author.send(':white_check_mark: У вас есть VIP-статус :crown:.')
