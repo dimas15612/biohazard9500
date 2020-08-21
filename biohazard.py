@@ -74,7 +74,7 @@ class MyClient(discord.Client):
 				await message.delete()
 				mc = message.content.replace('*bl', '')
 				f = open('blacklist.txt', 'a')
-				f.write(str(mc) + '\n')
+				f.write(mc + '\n')
 				f.close()
 				await message.author.send(':white_check_mark:')
 				
@@ -82,7 +82,7 @@ class MyClient(discord.Client):
 				await message.delete()
 				mc = message.content.replace('*wl', '')
 				f = open('whitelist.txt', 'a')
-				f.write(str(mc) + '\n')
+				f.write(mc + '\n')
 				f.close()
 				await message.author.send(':white_check_mark:')
 				
@@ -90,7 +90,7 @@ class MyClient(discord.Client):
 				await message.delete()
 				mc = message.content.replace('*гивип', '')
 				f = open('vip.txt', 'a')
-				f.write(str(mc) + '\n')
+				f.write(mc + '\n')
 				f.close()
 				await message.author.send(':white_check_mark:')
 		if white.find(str(message.guild.id)) == -1 and black.find(str(message.author.id)) == -1:
