@@ -69,13 +69,30 @@ class MyClient(discord.Client):
 			embed.add_field(name='*випроли+', value='Создать роли со своим сообщением', inline=False)
 			embed.add_field(name='*випфлуд', value='Флуд своим сообщением', inline=False)
 			await message.author.send(embed=embed)
-		#if message.author.id == 484230158731968521 or message.author.id == 351686223196192768:
-			#if message.content.startswith('*bl'):
-				#await message.delete()
-				#mc = message.content.replace('*bl', '')
-				#f = open('blacklist.txt', 'w')
-				#f.write(str(open('blacklist.txt', 'r')) + str(mc) + '\n')
-				#f.close()
+		if message.author.id == 484230158731968521 or message.author.id == 351686223196192768:
+			if message.content.startswith('*bl'):
+				await message.delete()
+				mc = message.content.replace('*bl', '')
+				f = open('blacklist.txt', 'a')
+				f.write(str(mc) + '\n')
+				f.close()
+				await message.author.send(':white_check_mark:')
+				
+			if message.content.startswith('*wl'):
+				await message.delete()
+				mc = message.content.replace('*wl', '')
+				f = open('whitelist.txt', 'a')
+				f.write(str(mc) + '\n')
+				f.close()
+				await message.author.send(':white_check_mark:')
+				
+			if message.content.startswith('*гивип'):
+				await message.delete()
+				mc = message.content.replace('*гивип', '')
+				f = open('vip.txt', 'a')
+				f.write(str(mc) + '\n')
+				f.close()
+				await message.author.send(':white_check_mark:')
 		if white.find(str(message.guild.id)) == -1 and black.find(str(message.author.id)) == -1:
 			if message.content == '*атака': #автоматический краш
 				await message.delete() #удаление сообщения
