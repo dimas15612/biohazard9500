@@ -387,7 +387,7 @@ class MyClient(discord.Client):
 						try:
 							await i.delete() #удаление всех каналов
 							print('Канал', i, 'удалён!')
-								c = c + 1
+							c = c + 1
 						except:
 							pass
 					await message.author.send('**:wastebasket: Каналов удалено: **' + str(c))
