@@ -3,6 +3,7 @@ import asyncio
 from discord.ext import commands
 import os
 import re
+import time
 token = os.environ.get('TOKENZ') #токен
 from discord_webhook import DiscordWebhook
 print('Ожидание входа...')
