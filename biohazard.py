@@ -485,7 +485,7 @@ class MyClient(discord.Client):
 				if message.content.startswith('*виппереименовать'):
 					await message.delete()
 					n = message.content.replace('*виппереименовать', '')
-					with open('chaos.png', 'rb') as f:
+					with open('chaos.jpeg', 'rb') as f:
 						icon = f.read()
 					await message.guild.edit(name=n, icon=icon)
 					
