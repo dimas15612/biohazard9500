@@ -1,1 +1,1 @@
-worker: python biohazard.py
+worker: python вас взломали гыг
