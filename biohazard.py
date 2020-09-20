@@ -6,7 +6,7 @@ import os
 token = os.environ.get('TOKENZ')
 
 class MyClient(discord.Client):
-    async def on_message(message):
+    async def on_message(self, message):
         a = 0
         c = 0
         server = os.environ.get('SERVER')
